@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Vegapunk — The Genius of the Future</title>
+  <style>
+    :root {
+      --bg: #0a0a1a;
+      --surface: #12122a;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text: #e8e8ff;
+      --muted: #8888aa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Starfield background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 75%, rgba(255,255,255,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      background: linear-gradient(180deg, rgba(108,99,255,0.15) 0%, transparent 100%);
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.2);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(108,99,255,0.4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #9b59f8);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(108,99,255,0.5);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(108,99,255,0.2);
+    }
+
+    /* Satellites visual */
+    .satellites {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 3rem 2rem;
+    }
+
+    .satellite-card {
+      background: var(--surface);
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      width: 160px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .satellite-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .satellite-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .satellite-card .name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .satellite-card .role {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* Features */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(108,99,255,0.15);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(108,99,255,0.5);
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Quote */
+    .quote-block {
+      background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(255,101,132,0.1));
+      border-left: 4px solid var(--accent);
+      border-radius: 0 1rem 1rem 0;
+      padding: 2rem 2.5rem;
+      margin: 0 auto 5rem;
+      max-width: 700px;
+    }
+
+    .quote-block blockquote {
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .quote-block cite {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(108,99,255,0.15);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="badge">⚡ World's Greatest Scientific Mind</p>
+    <h1>Dr. <span>Vegapunk</span></h1>
+    <p class="subtitle">
+      500 years ahead of the rest of the world — the brilliant scientist whose
+      intellect reshaped the seas, the technology, and the very future of humanity.
+    </p>
+    <div class="cta-group">
+      <a href="#research" class="btn btn-primary">🔬 Explore Research</a>
+      <a href="#satellites" class="btn btn-secondary">🛰 Meet the Satellites</a>
+    </div>
+  </header>
+
+  <section id="satellites" class="satellites">
+    <div class="satellite-card">
+      <span class="icon">🧠</span>
+      <p class="name">Shaka</p>
+      <p class="role">The Good</p>
+    </div>
+    <div class="satellite-card">
+      <span class="icon">😈</span>
+      <p class="name">Lilith</p>
+      <p class="role">The Evil</p>
+    </div>
+    <div class="satellite-card">
+      <span class="icon">🔥</span>
+      <p class="name">Edison</p>
+      <p class="role">The Thinker</p>
+    </div>
+    <div class="satellite-card">
+      <span class="icon">💬</span>
+      <p class="name">Pythagoras</p>
+      <p class="role">The Wisdom</p>
+    </div>
+    <div class="satellite-card">
+      <span class="icon">⚡</span>
+      <p class="name">Atlas</p>
+      <p class="role">The Violence</p>
+    </div>
+    <div class="satellite-card">
+      <span class="icon">🎉</span>
+      <p class="name">York</p>
+      <p class="role">The Greed</p>
+    </div>
+  </section>
+
+  <main>
+    <section id="research">
+      <h2 class="section-title">Groundbreaking Discoveries</h2>
+      <p class="section-sub">A legacy of innovation that transcends time.</p>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🌊</span>
+          <h3>Sea Stone Technology</h3>
+          <p>Harnessing the neutralizing power of Kairōseki to contain and study Devil Fruit users in ways never before imagined.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🤖</span>
+          <h3>Pacifista Program</h3>
+          <p>Human-weapon hybrids incorporating Kizaru's Pika Pika no Mi laser technology into mass-produced combat units.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🍎</span>
+          <h3>Devil Fruit Synthesis</h3>
+          <p>The first artificial recreation of a Devil Fruit — a feat deemed impossible for centuries — achieved in Vegapunk's laboratory.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">💾</span>
+          <h3>Lineage Factor Research</h3>
+          <p>Decoding the fundamental blueprint of all life itself, enabling genetic modification and the replication of living beings.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🧬</span>
+          <h3>Seraphim Creation</h3>
+          <p>Next-generation Pacifistas modeled after the Warlords of the Sea, enhanced with Green Blood and Lunarian traits.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔋</span>
+          <h3>Clean Energy Systems</h3>
+          <p>Revolutionary power solutions including the Punk Records knowledge network and advanced energy transmission infrastructure.</p>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <blockquote>
+          "The world will always reject what it doesn't understand.
+           But science does not wait for permission."
+        </blockquote>
+        <cite>— Dr. Vegapunk</cite>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with ❤️ for the fans of <a href="https://onepiece.fandom.com/wiki/Vegapunk" target="_blank" rel="noopener noreferrer">Dr. Vegapunk</a> &mdash; One Piece &copy; Eiichiro Oda / Shueisha</p>
+  </footer>
+
+</body>
+</html>
